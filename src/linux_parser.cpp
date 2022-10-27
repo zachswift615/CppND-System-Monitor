@@ -89,13 +89,13 @@ float LinuxParser::MemoryUtilization() {
           mfree = stof(v);
           
         }
-
-        if (mfree && mtotal) {
-          return (mtotal - mfree) / mtotal;
-        }
       }
     }
+    if (mfree && mtotal) {
+      return (mtotal - mfree) / mtotal;
+    }
   }
+  
 }
 
 // TODO: Read and return the system uptime
