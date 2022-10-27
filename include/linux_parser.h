@@ -24,6 +24,7 @@ long UpTime();
 std::vector<int> Pids();
 int TotalProcesses();
 int RunningProcesses();
+float ParseKVFile(std::string filename, std::string key);
 std::string OperatingSystem();
 std::string Kernel();
 
