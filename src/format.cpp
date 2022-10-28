@@ -7,10 +7,7 @@
 using std::string;
 using std::stringstream;
 
-// Helper function to format time expressed in seconds
-// INPUT: Long int measuring seconds
-// OUTPUT: HH:MM:SS
-
+// Format integer of seconds into elapsed time string HH:MM:SS
 string Format::ElapsedTime(long seconds) {
   int hh, mm, ss;
   stringstream elapsedString;
