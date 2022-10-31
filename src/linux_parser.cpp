@@ -106,8 +106,7 @@ long LinuxParser::UpTime() {
     while (std::getline(inputFileStream, line)) {
       std::istringstream inputFileLineStream(line);
       string totalTime;
-      string onlyIdleTime;
-      inputFileLineStream >> totalTime >> onlyIdleTime;
+      inputFileLineStream >> totalTime;
       return stol(totalTime);
     }
   }
