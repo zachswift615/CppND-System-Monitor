@@ -6,7 +6,9 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <iostream>
 
+using std::cout;
 using std::stof;
 using std::string;
 using std::to_string;
@@ -126,7 +128,47 @@ long LinuxParser::ActiveJiffies() { return 0; }
 long LinuxParser::IdleJiffies() { return 0; }
 
 // TODO: Read and return CPU utilization
-vector<string> LinuxParser::CpuUtilization() { return {}; }
+vector<string> LinuxParser::CpuUtilization() {  
+  
+
+  std::ifstream procStatFileStream(kProcDirectory + kStatFilename);
+  if (procStatFileStream.is_open()) {
+    string line;
+    while (std::getline(procStatFileStream, line)) {
+      std::istringstream procStatLineStream(line);
+
+      string cpu_header;
+      string user;    
+      string nice;   
+      string system;  
+      string idle;      
+      string iowait; 
+      string irq;   
+      string softirq;  
+      string steal;  
+      string guest;  
+      string guest_nice;
+      std::cout << "we got here 1";
+      
+      while (procStatLineStream >> cpu_header >> user >>
+              nice >> system >>
+              idle >> iowait >>
+              irq >> softirq >>
+              steal >> guest >>
+              guest_nice
+      ) {
+        std::cout << "we got here 2";
+        vector<string> cpuVector;
+        
+        if (cpu_header == "cpu") {
+          cpuVector = {user, nice, system, idle, iowait, irq, softirq, steal, guest, guest_nice};
+          return cpuVector;
+        }
+        
+      }
+    }
+  }
+}
 
 float LinuxParser::ParseKVFile(string fileName, string key) {
   std::ifstream inputFileStream(fileName);

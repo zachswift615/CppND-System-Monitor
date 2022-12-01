@@ -7,6 +7,16 @@ class Processor {
 
   // TODO: Declare any necessary private members
  private:
+    float prevuser;
+    float prevnice;
+    float prevsystem;
+    float previdle;
+    float previowait;
+    float previrq;
+    float prevsoftirq;
+    float prevsteal;
+    float prevguest;
+    float prevguest_nice;
 };
 
 #endif
