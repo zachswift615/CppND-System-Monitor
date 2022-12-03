@@ -3,14 +3,17 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <iostream>
 
 using std::string;
 using std::vector;
+using std::cout;
 
 
 float Processor::Utilization() {
     vector<string> cpuInfo = LinuxParser::CpuUtilization();
-
+    std::cout << "we got here 2";
+    std::cout << cpuInfo.size();
     float user = stof(cpuInfo[1]);
     float nice = stof(cpuInfo[2]);   
     float system = stof(cpuInfo[3]);  

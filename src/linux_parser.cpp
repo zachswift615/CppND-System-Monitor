@@ -130,7 +130,6 @@ long LinuxParser::IdleJiffies() { return 0; }
 // TODO: Read and return CPU utilization
 vector<string> LinuxParser::CpuUtilization() {  
   
-
   std::ifstream procStatFileStream(kProcDirectory + kStatFilename);
   if (procStatFileStream.is_open()) {
     string line;
