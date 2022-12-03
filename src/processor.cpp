@@ -8,10 +8,10 @@ using std::string;
 using std::vector;
 
 
-float Processor::Utilization() { 
+float Processor::Utilization() {
     vector<string> cpuInfo = LinuxParser::CpuUtilization();
-    
-    float user = stof(cpuInfo[1]);    
+
+    float user = stof(cpuInfo[1]);
     float nice = stof(cpuInfo[2]);   
     float system = stof(cpuInfo[3]);  
     float idle = stof(cpuInfo[4]);      
@@ -46,5 +46,5 @@ float Processor::Utilization() {
     prevguest = guest;
     prevguest_nice = guest_nice;
 
-    return (totald - idled)/totald;
+    return (totald - idled) / totald;
  }
