@@ -11,7 +11,8 @@ using std::cout;
 
 
 float Processor::Utilization() {
-    vector<string> cpuInfo = LinuxParser::CpuUtilization();
+    // vector<string> cpuInfo = LinuxParser::CpuUtilization();
+    vector<string> cpuInfo = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
     std::cout << "we got here 2";
     std::cout << cpuInfo.size();
     float user = stof(cpuInfo[1]);
