@@ -127,46 +127,26 @@ long LinuxParser::ActiveJiffies() { return 0; }
 // TODO: Read and return the number of idle jiffies for the system
 long LinuxParser::IdleJiffies() { return 0; }
 
-// TODO: Read and return CPU utilization
-vector<string> LinuxParser::CpuUtilization() {  
+// Read and return CPU utilization
+vector<string> LinuxParser::CpuUtilization() {
+  string line;
+  string value;
+  vector<string> cpuInfo;
+  std::ifstream procStatFilestream(kProcDirectory + kStatFilename);
   
-  std::ifstream procStatFileStream(kProcDirectory + kStatFilename);
-  if (procStatFileStream.is_open()) {
-    string line;
-    while (std::getline(procStatFileStream, line)) {
-      std::istringstream procStatLineStream(line);
-
-      string cpu_header;
-      string user;    
-      string nice;   
-      string system;  
-      string idle;      
-      string iowait; 
-      string irq;   
-      string softirq;  
-      string steal;  
-      string guest;  
-      string guest_nice;
-      std::cout << "we got here 1";
-      
-      while (procStatLineStream >> cpu_header >> user >>
-              nice >> system >>
-              idle >> iowait >>
-              irq >> softirq >>
-              steal >> guest >>
-              guest_nice
-      ) {
-        std::cout << "we got here 2";
-        vector<string> cpuVector;
-        
-        if (cpu_header == "cpu") {
-          cpuVector = {user, nice, system, idle, iowait, irq, softirq, steal, guest, guest_nice};
-          return cpuVector;
-        }
-        
+  if (procStatFilestream.is_open()) {
+    
+    std::getline(procStatFilestream, line);
+    std::istringstream procStatLinestream(line);
+  
+    while (procStatLinestream >> value) {
+      if (value != "cpu"){
+        cpuInfo.emplace_back(value);
       }
     }
+
   }
+  return cpuInfo;
 }
 
 float LinuxParser::ParseKVFile(string fileName, string key) {
